@@ -1,0 +1,224 @@
+1).Write a query to display the product details which are common to both the specified conditions.
+  SQL> select pid,pname from product where pid<='p103' UNION
+  select pid,pname from product where pid>='p107';
+
+  PID        PNAME
+  ---------- --------------------
+  p101       Saree
+  p102       Shirt
+  p103       salwar
+  p107       Lipstick
+  p108       LipStick
+  p109       CollegeBag
+  p110       TravelBag
+  p111       LaptopBag
+  p112       Chair
+  p120       JeanTop
+
+  10 rows selected.
+
+2).Write a query to display the rows that are common to both the specified conditions using 'UNION ALL'.
+  SQL> select pid,pname,category_name from product where pid<='p105'
+  UNION ALL select pid,pname,category_name from product where pid>='p108';
+
+  PID          PNAME                CATEGORY_NAME
+  ---------- -------------------- -----------------
+  p101       Saree                dress
+  p102       Shirt                dress
+  p103       salwar               dress
+  p104       Fridge               eappliance
+   p105       Ecooker              eappliance
+  p108       LipStick             cosmetics
+  p109       CollegeBag           Bag
+  p110       TravelBag            Bag
+  p111       LaptopBag            Bag
+  p112       Chair                Furniture
+  p120       JeanTop              dress
+
+  11 rows selected.
+
+3).Write a query to display the rows that are common to both the specified conditions.
+  SQL> select sid,sname from supplier where sid<='s106'
+  INTERSECT select sid,sname from supplier where sid>='s108';
+
+  no rows selected
+
+4).Write a query to display the rows that are common to both the specified conditions.
+  SQL> select sid,sname from supplier where sid<='s111' INTERSECT select sid,sname from supplier where sid>='s108';
+
+  SID        SNAME
+  ---------- --------------------
+  s108       Harshan
+  s109       Priyan
+  s110       Rajan
+  s111       Sidharth
+
+5).Write a query to display the rows that are not common to both the specified conditions.
+  SQL> select sid,sname from supplier where sid<='s111' MINUS select sid,sname from supplier where sid>='s108';
+  
+  SID        SNAME
+  ---------- --------------------
+  s101       Hari
+  s102       Guru
+  s103       Ganga
+  s104       Raja
+  s105       Janav
+  s106       Meena
+  s107       Tharun
+
+  7 rows selected.
+
+6).Write a query to display all the details of the customer who buys atleast one product from the retailstore.
+  SQL> SELECT product.pid,supplier.sname,product.pprice FROM product INNER JOIN supplier ON product.sid=supplier.sid;
+
+  PID        SNAME                    PPRICE
+  ---------- -------------------- ----------
+  p101       Hari                        500
+  p102       Hari                        800
+  p103       Hari                       2000
+  p104       Guru                      25000
+  p105       Guru                       5000
+  p106       Ganga                        50
+  p107       Raja                         40
+  p108       Janav                        40
+  p109       Meena                      1500
+  p110       Tharun                     2500
+  p111       Harshan                    2500
+  p112       Priyan                      500
+   p120       Guru                       1000
+
+  13 rows selected.
+
+
+7).Write a query to display all the supplier along with their product details
+   and then display all the supplier details by  left outer join.
+  SQL> SELECT product.pid,supplier.sname,product.pprice FROM product LEFT JOIN supplier ON product.sid=supplier.sid;
+
+  PID        SNAME                    PPRICE
+  ---------- -------------------- ----------
+  p101       Hari                        500
+  p102       Hari                        800
+  p103       Hari                       2000
+  p104       Guru                      25000
+  p105       Guru                       5000
+  p120       Guru                       1000
+  p106       Ganga                        50
+  p107       Raja                         40
+  p108       Janav                        40
+  p109       Meena                      1500
+  p110       Tharun                     2500
+  p111       Harshan                    2500
+  p112       Priyan                      500
+
+  13 rows selected.
+
+8).Write a query to display all the supplier along with their product details and then display all the products using right outer join.
+    SQL> SELECT product.pid,supplier.sname,product.pprice FROM product RIGHT JOIN supplier ON product.sid=supplier.sid;
+
+  PID        SNAME                    PPRICE
+  ---------- -------------------- ----------
+  p101       Hari                        500
+  p102       Hari                        800
+  p103       Hari                       2000
+  p104       Guru                      25000
+  p105       Guru                       5000
+  p106       Ganga                        50
+  p107       Raja                         40
+  p108       Janav                        40
+  p109       Meena                      1500
+  p110       Tharun                     2500
+  p111       Harshan                    2500
+  p112       Priyan                      500
+  p120       Guru                       1000
+
+ 15 rows selected.
+
+9).Write a query to display  all the supplier along with their product details and then display all the products using full outer join.
+  SQL> SELECT product.pid,supplier.sname,product.pprice FROM product FULL OUTER JOIN supplier ON product.sid=supplier.sid;
+
+   PID        SNAME                    PPRICE
+  ---------- -------------------- ----------
+  p101       Hari                        500
+  p102       Hari                        800                      
+    p103       Hari                       2000
+  p104       Guru                      25000
+  p105       Guru                       5000
+  p106       Ganga                        50
+  p107       Raja                         40
+  p108       Janav                        40
+  p109       Meena                      1500
+  p110       Tharun                     2500
+  p111       Harshan                    2500
+  p112       Priyan                      500
+  p120       Guru                       1000
+
+  15 rows selected.
+
+10).Write a query to find the minimum product price.
+   SQL> select min(pprice) as smallestprice from products;
+   
+   SmallestPrice
+   ----------------
+   500
+
+11).Write a query to find the maximum product price.
+  SQL> select max(pprice) as greatestprice from products;
+  
+  GreatestPrice
+  -------------------
+   25000
+   
+12).Write a query to find the average price of products.
+  SQL> select avg(pprice) as averageprice from products;
+  
+  AveragePrice
+  ----------------
+  -----------------
+     4043.57
+13).Write a query to display the product details whose price is greater than average price of all products.
+   SQL> select * from products where pprice >(select avg (pprice) from products);
+     PID      PNAME          PPRICE      AVAIL SID        CATEGORY_N
+   -------- ---------- ---------- ---------- ---------- ----------
+   p104     fridge          25000       3000 s102       eappliance
+   p105     ecooker          5000       3000 s102       eappliance
+14)..Write a query to join two tables using cross join.
+   SQL> select * from  buys cross join transaction;
+     PID        CID        TRANSTYPE              TRANSAMT TDATE     CID       TRANSID
+  ---------- ---------- -------------------- ---------- --------- --------------------
+   p105       c101       Gpay                       5000 10-JUN-21 c101      t101
+   p101       c106       Gpay                       5000 10-JUN-21 c101      t101
+   p102       c102       Gpay                       5000 10-JUN-21 c101      t101
+   p103       c105       Gpay                       5000 10-JUN-21 c101      t101
+   p104       c103       Gpay                       5000 10-JUN-21 c101      t101
+   p106       c106       Gpay                       5000 10-JUN-21 c101      t101
+   p107       c104       Gpay                       5000 10-JUN-21 c101      t101
+   p108       c108       Gpay                       5000 10-JUN-21 c101      t101
+   p109       c109       Gpay                       5000 10-JUN-21 c101      t101
+   p110       c110       Gpay                       5000 10-JUN-21 c101      t101
+   p114       c102       Gpay                       5000 10-JUN-21 c101      t101
+
+15).Write a query to join two tables using natural join.
+   SQL> select * from transaction natural join buys;
+     CID        TRANSTYPE              TRANSAMT TDATE     TRANSID    PID
+   ---------- -------------------- ---------- --------- ---------- ----------
+     c101       Gpay                       5000 10-JUN-21 t101       p105
+   c106       cod                       85000 14-SEP-20 t109       p101
+   c102       cod                        7000 10-JUL-21 t102       p102
+   c105       cod                       15000 13-DEC-21 t105       p103
+   c103       netbanking                10000 11-DEC-21 t103       p104
+   c106       cod                       85000 14-SEP-20 t109       p106
+   c104       Gpay                      15000 12-DEC-21 t104       p107
+   c108       gpay                      85000 14-AUG-20 t108       p108
+   c108       gpay                      75000 14-AUG-20 t107       p108
+   c110       gpay                       5000 24-SEP-20 t110       p110
+   c102       cod                        7000 10-JUL-21 t102       p114
+   c104       Gpay                      15000 12-DEC-21 t104       p115
+   12 rows selected.
+
+
+16).Write a query to count the number of products.
+   SQL> select count(pid) from products;
+   
+   COUNT(PID)
+   ------------
+   16

@@ -1,0 +1,153 @@
+1).Write a query to create create a supplier table.
+  SQL> create table supplier(sid varchar(10) primary key,sname
+       varchar(20) unique,address varchar(100) not null,pn1 int,pn2 int);
+  Table created.
+
+2).Write a query to display the structure of the table.
+   SQL> desc supplier;
+   Name      Null?                  Type
+  ---------  ------------  --------------
+  SID          NOT NULL      VARCHAR2(10)
+  SNAME                      VARCHAR2(20)
+  ADDRESS      NOT NULL      VARCHAR2(100)
+  PN1                        NUMBER(38)
+  PN2                        NUMBER(38)
+
+3).Write a query to create a product table.
+   SQL> create table product(pid varchar(10) primary key,
+        pname varchar(20) unique,pprice int not null,avail int,
+        category_name varchar(100) not null,sid varchar(10) references supplier(sid))
+   Table created.
+
+4).Write  a query to display the structure of supplier table.
+   SQL> desc supplier;
+    Name                        Null          Type
+    ----------------    -------------     -------------
+    SID                      NOT NULL     VARCHAR2(10)
+    SNAME                                 VARCHAR2(20)
+    ADDRESS                  NOT NULL     VARCHAR2(100)
+    PN1                                   NUMBER(38)
+    PN2                                   NUMBER(38)
+
+5).Write  a query to display the structure of product table.
+   SQL> desc product;
+   Name                              Null?                    Type
+   --------------            ---------------      -----------------
+   PID                            NOT NULL        VARCHAR2(10)
+   PNAME                                          VARCHAR2(20)
+   PPRICE                         NOT NULL        NUMBER(38)
+   AVAIL                                          NUMBER(38)
+   CATEGORY_NAME                  NOT NULL        VARCHAR2(100)
+   SID                                            VARCHAR2(10)
+
+6).Write a query to create a customer table.
+    SQL> create table customer(cid varchar(10) primary key,
+         cname varchar(20) unique,address varchar(30) not null,phno int);
+    Table created.
+
+7).Write  a query to display the structure of customer table.
+   SQL> desc customer;
+    Name                           Null?                 Type
+   ----------------   -------------------     ----------------
+   CID                        NOT NULL          VARCHAR2(10)
+   CNAME                                        VARCHAR2(20)
+   ADDRESS                    NOT NULL          VARCHAR2(30)
+   PHNO                                         NUMBER(38)
+
+8).Write a query to create buys table.
+    SQL> create table buys(pid varchar(10) references product(pid),
+         cid varchar(10) references customer(cid));
+    Table created.
+    
+9).Write  a query to display the structure of buys table.
+    SQL> desc buys;
+ Name                             Null?             Type
+ --------------     -------------------- ----------------
+ PID                                        VARCHAR2(10)
+ CID                                        VARCHAR2(10)
+
+10).Write  a query to create a transaction table.
+    SQL> create table transaction(transid varchar(10) primary key,
+         transtype varchar(20) not null,transamount int not null,
+         tdate date,cid varchar(10) references customer(cid));
+    Table created.
+
+11).Write a query to display the structure of transaction table.
+     SQL> desc transaction;
+ Name                       Null?                   Type
+ ------------  ------------------   --------------------
+ TRANSID                 NOT NULL           VARCHAR2(10)
+ TRANSTYPE               NOT NULL           VARCHAR2(20)
+ TRANSAMOUNT             NOT NULL           NUMBER(38)
+ TDATE                                      DATE
+ CID                                        VARCHAR2(10)
+
+12).Write a query to add a supplier details.
+    SQL> insert into supplier values('s101','Guru',
+    '23,MDR Nagar,Aruppukottai',9998882233,8886667773);
+    1 row created.
+
+13).Write a query to display the supplier details.
+    SQL> select * from supplier;
+
+   S101       Guru
+   23,MDR Nagar,Aruppukottai
+   9998882233 8886667773
+
+14).Write a query to add a supplier details.
+    SQL> insert into supplier values('s102','Raja',
+         '12,Mani Nagar,Madurai',9998882233,8886667773);
+      1 row created.
+
+15).Write a query to display the supplier details.
+    SQL> select * from supplier;
+
+    s101       Guru
+   23,MDR Nagar,Aruppukottai
+   9998882233 8886667773
+
+   s102       Raja
+  12,Mani Nagar,Madurai
+  9998882233 8886667773
+
+
+16).Write a query to add a product detail.
+    SQL> insert into product values('p101','Saree',1500,500,'Dress','s102');
+    1 row created.
+
+17).Write a query to display the product details.
+     SQL> select * from product;
+
+    PID        PNAME          PPRICE      AVAIL       CATEGORY NAME     SID
+   ---------- ----------- ---------- ------------ -----------------  --------
+    p101       Saree           1500        500             Dress        s102
+
+18).Write a query to add a column in supplier table.
+    SQL> alter table supplier add "email" varchar(10);
+    Table altered.
+
+19).Write a query to drop a column in supplier table.
+     SQL> alter table supplier drop column "email";
+     Table altered.
+
+20).Write a query to create a item table.
+    SQL> create table item(item_id varchar(10),price int,iname varchar(10));
+    Table created.
+21).Write a query to truncate the item table.
+    SQL> truncate table item;
+   Table truncated.
+
+22).Write a query to drop the item table.
+     SQL> drop table item;
+     Table dropped.
+23).Write a query to add a constraint to the product table.
+    SQL>alter table product modify (pprice default 1000);
+    Table altered.
+24).Write a query to add a constarint to the product table.
+    SQL>alter table product add constraint pid check
+        (pid between 'p101' and 'p117');
+    Table altered.
+25).Write a query to drop a constraint to the product table.
+    SQL>alter table product drop constraint pid;
+    Table altered.
+                                                                              

@@ -1,0 +1,52 @@
+1)WRITE A QUERY TO CREATE INDEX FOR SUPPLIER TABLE.
+  SQL> create index supplier_idx on supplier(pn1);
+  Index created.
+2)WRITE A QUERY TO CREATE UNIQUE INDEX ON CUSTOMER.
+  SQL> create unique index customer_idx on customer(cid,cname);
+  Index created.
+3)WRITE A QUERY TO CREATE VIEW ON SUPPLIER TABLE.
+  SQL> create or replace view sp_view as (select sid,sname from supplier);
+  View created.
+4)WRITE A QUERY TO DISPLAY THE VIEW OF THE SUPPLIER.
+  SQL> select * from sp_view;
+  SID        SNAME
+  ---------- --------------------
+  s101       muhil
+  s102       rajini
+  s103       raju
+  s104       ramu
+  s105       hema
+  s106       hisana
+  s107       vijay
+  s108       surya
+  s109       ashia
+  s110       absiya
+  10 rows selected.
+5)WRITE A QUERY TO CREATE TRIGGER FOR CUSTOMER TABLE.
+ SQL> CREATE OR REPLACE TRIGGER Q
+     2  BEFORE INSERT OR UPDATE OR DELETE ON CUSTOMER
+     3  BEGIN
+     4  CASE
+     5  WHEN INSERTING THEN
+     6  dbms_output.put_line('INSERTING');
+     7      WHEN UPDATING THEN
+     8  dbms_output.put_line('UPDATING');
+     9      WHEN DELETING THEN
+    10  dbms_output.put_line('DELETING');
+    11     END CASE;
+    12      END;
+    13  /
+    Trigger created.
+
+TRIGGER AFTER INSERTION:
+
+SQL> insert into customer values('c117','surya',5425523454,'32B west street');
+     1 row created.
+SQL> set serveroutput on;
+SQL> insert into customer values('c118','surya',5425523454,'32B west street');
+     INSERTING
+     1 row created.
+6)WRITE A QUERY TO DROP TRIGGER ON CUSTOMER TABLE.
+  SQL> drop trigger t;
+
+  Trigger dropped.

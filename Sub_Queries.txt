@@ -1,0 +1,191 @@
+1).Write a query to display the details of product with maximum price.
+  SQL> select * from product where pprice=(select max(pprice) from product);
+
+  PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p104       Fridge                    25000       3000 s102       eappliance
+
+2).Write a query to retrieve the details of customer who has payment amount more than or equal to 2000.
+   SQL> select * from product;
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p101       Saree                       500       1000 s101       dress
+  p102       Shirt                       800       2000 s101       dress
+  p103       salwar                     2000       3000 s101       dress
+  p104       Fridge                    25000       3000 s102       eappliance
+  p105       Ecooker                    5000       3000 s102       eappliance
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p107       Lipstick                     40       1000 s104       cosmetics
+  p108       LipStick                     40       1000 s105       cosmetics
+  p109       CollegeBag                 1500       2000 s106       Bag
+  p110       TravelBag                  2500       2500 s107       Bag
+  p111       LaptopBag                  2500       2500 s108       Bag
+
+  PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p112       Chair                       500       2500 s109       Furniture
+  p120       JeanTop                    1000        200 s102       dress
+  
+  13 rows selected.
+  
+ 3).Write a query to display the details of customer if he has purchased any product atleast once.
+   SQL> select cname,cid from customer where cid IN (select cid from transaction where transamount>=2000);
+
+   CNAME                CID
+  -------------------- ----------
+  vijay                c101
+  Surya                c102
+  Hariharan            c103
+  Avyukdh              c104
+  Shri                 c105
+  Vidhya               c106
+  Meghna               c107
+  Prajin               c109
+  Ashwin               c110
+
+  9 rows selected.
+
+4).Write a query to display the details of product which category belongs to cosmetics.
+   select * from product where pid IN (select pid from buys) and category_name='cosmetics';
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p107       Lipstick                     40       1000 s104       cosmetics
+  p108       LipStick                     40       1000 s105       cosmetics
+  
+ 5).Write a query to display details of customer with cid less than c110 and have purchased products.
+   SQL> select * from product where pid IN
+   (select pid from product where category_name='cosmetics');
+
+  PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p107       Lipstick                     40       1000 s104       cosmetics
+  p108       LipStick                     40       1000 s105       cosmetics
+
+6).Write a query to display the product category if category
+   product is purchased by more than 2 customers.
+   SQL> select * from customer c  where NOT EXISTS (select * from buys where c.cid>='c110');
+
+   CID        CNAME                      PHNO ADDRESS
+   ---------- -------------------- ---------- ---------------
+   c109       Prajin               9134568812 43,SouthSt,Apk
+   c108       Gopinaath            9190807892 76,SouthSt,Mdu
+   c107       Meghna               9112244364 76,WestSt,Mdu
+   c106       Vidhya               9912123364 34,WestSt,Svk
+   c105       Shri                 9989922344 23,BigSt,Svk
+   c104       Avyukdh              9987612500 9,BigSt,Vnr
+   c103       Hariharan            9487909089 99,PaulSt,Vnr
+   c102       Surya                6789543212 72,CarSt,Apk
+   c101       vijay                9.9886E+10 12,CarSt,Apk
+
+  9 rows selected.
+  
+ 7).Write a query to display the details of product whose price is > the minimum price in the table.
+
+  SQL> select * from product where pprice> (select min(pprice) from product);
+
+  PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p101       Saree                       500       1000 s101       dress
+  p102       Shirt                       800       2000 s101       dress
+  p103       salwar                     2000       3000 s101       dress
+  p104       Fridge                    25000       3000 s102       eappliance
+  p105       Ecooker                    5000       3000 s102       eappliance
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p109       CollegeBag                 1500       2000 s106       Bag
+  p110       TravelBag                  2500       2500 s107       Bag
+  p111       LaptopBag                  2500       2500 s108       Bag
+  p112       Chair                       500       2500 s109       Furniture
+  p120       JeanTop                    1000        200 s102       dress
+
+  11 rows selected.
+
+8).Write a query to display the prices of item whose price is < price of product in 'p104'.
+   SQL> select * from product where pprice<all(select pprice from product where pid='p104');
+
+  PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p105       Ecooker                    5000       3000 s102       eappliance
+  p110       TravelBag                  2500       2500 s107       Bag
+  p111       LaptopBag                  2500       2500 s108       Bag
+  p103       salwar                     2000       3000 s101       dress
+  p109       CollegeBag                 1500       2000 s106       Bag
+  p120       JeanTop                    1000        200 s102       dress
+  p102       Shirt                       800       2000 s101       dress
+  p112       Chair                       500       2500 s109       Furniture
+  p101       Saree                       500       1000 s101       dress
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p108       LipStick                     40       1000 s105       cosmetics
+  p107       Lipstick                     40       1000 s104       cosmetics
+
+  12 rows selected.
+
+9).Write a query to display the details of supplier who supplies product which matches with categoryname.
+   SQL> select * from supplier where sid IN (select sid from product where category_name='cosmetics');
+
+   SID        SNAME                       PN1        PN2 ADDRESS
+  ---------- -------------------- ---------- ---------- ---------------
+  s103       Ganga                9890044351 9912234452 92,EastSt,Apk
+  s104       Raja                 8998762031 7784982144 9,GandhiSt,Vnr
+  s105       Janav                9443878962 9786945660 45,MountSt,Mdu
+
+10).Write a query to display the details of customers who made transaction on '18-jan-2021'.
+   SQL> select * from customer where cid IN (select cid from transaction where tdate='18-jan-2021');
+   
+   CID        CNAME                      PHNO ADDRESS
+  ---------- -------------------- ---------- ---------------
+   c108       Gopinaath            9190807892 76,SouthSt,Mdu
+
+11).Write a query to display the details of cutomer who hasn't bought any product.
+   SQL> select cid,cname from customer where NOT EXISTS (select * from buys where buys.cid=customer.cid) ORDER BY cname;
+   CID        CNAME
+   ---------- --------------------
+   c111       Vijay
+
+12).Write a query to display the details of product whose
+    pprice is greater than average pprice of product.
+   SQL> select pid,pname,category_name,pprice from product p1 where pprice >= (select AVG(pprice) from product p2 where p1.category_name=p2.category_name);
+
+  PID        PNAME                CATEGORY_N     PPRICE
+  ---------- -------------------- ---------- ----------
+  p103       salwar               dress            2000
+  p104       Fridge               eappliance      25000
+  p106       Eyeliner             cosmetics          50
+  p110       TravelBag            Bag              2500
+  p111       LaptopBag            Bag              2500
+  p112       Chair                Furniture         500
+
+  6 rows selected.
+
+13).Write a query to display the product details which are all of same category.
+  SQL> select p.pname,p.category_name from product p where p.sid IN (select sid from product s where p.category_name=s.category_name);
+  PNAME                CATEGORY_N
+  -------------------- ----------
+  Saree                dress
+  Shirt                dress
+  salwar               dress
+  Fridge               eappliance
+  Ecooker              eappliance
+  Eyeliner             cosmetics
+  Lipstick             cosmetics
+  LipStick             cosmetics
+  CollegeBag           Bag
+  TravelBag            Bag
+  LaptopBag            Bag
+
+  PNAME                CATEGORY_N
+  -------------------- ----------
+  Chair                Furniture
+  JeanTop              dress
+
+  13 rows selected.
+  
+14).Write a query to display the product details which generates the maximum value.
+   SQL> select pid from product group by pid having sum(pprice)=(select  max(sum(pprice)) from product group by pid);
+
+   PID
+  ----------
+  p104

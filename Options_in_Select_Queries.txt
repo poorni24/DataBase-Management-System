@@ -1,0 +1,255 @@
+1).Write a query to display the supplier name and phonenumber1 from supplier table.
+SQL> select sname,pn1 from supplier;
+
+SNAME                       PN1                                                 
+-------------------- ----------                                                 
+Hari                 9940686021                                                 
+Guru                 9922786521                                                 
+Ganga                9890044351                                                 
+Raja                 8998762031                                                 
+Janav                9443878962                                                 
+Meena                7865483921                                                 
+Tharun               6363457890                                                 
+Harshan              6334567850                                                 
+Priyan               6789435689                                                 
+Rajan                9445678689                                                 
+Sidharth             9080706050                                                 
+
+11 rows selected.
+
+2).Write a query to display the product details whose price are above 1000.
+ SQL> select * from product where pprice>1000;
+
+PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N     
+---------- -------------------- ---------- ---------- ---------- ----------     
+p103       salwar                     2000       3000 s101       dress          
+p104       Fridge                    25000       3000 s102       eappliance     
+p105       Ecooker                    5000       3000 s102       eappliance     
+p109       CollegeBag                 1500       2000 s106       Bag            
+p110       TravelBag                  2500       2500 s107       Bag            
+p111       LaptopBag                  2500       2500 s108       Bag            
+
+6 rows selected.
+
+
+3).Write a query to display the products whose price lies between 1000 and 10000.
+SQL> select * from product where pprice between 1000 and 10000 ;
+
+PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N     
+---------- -------------------- ---------- ---------- ---------- ----------     
+p103       salwar                     2000       3000 s101       dress          
+p104       Fridge                    25000       3000 s102       eappliance     
+p105       Ecooker                    5000       3000 s102       eappliance     
+p109       CollegeBag                 1500       2000 s106       Bag            
+p110       TravelBag                  2500       2500 s107       Bag            
+p111       LaptopBag                  2500       2500 s108       Bag            
+
+6 rows selected.
+
+4).Write a query to display the products whose price lies between 1000 and 10000.
+SQL> select * from product where pprice between 1000 and 100000;
+
+PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N     
+---------- -------------------- ---------- ---------- ---------- ----------     
+p103       salwar                     2000       3000 s101       dress          
+p104       Fridge                    25000       3000 s102       eappliance     
+p105       Ecooker                    5000       3000 s102       eappliance     
+p109       CollegeBag                 1500       2000 s106       Bag            
+p110       TravelBag                  2500       2500 s107       Bag            
+p111       LaptopBag                  2500       2500 s108       Bag            
+
+6 rows selected.
+
+5).Write a query to display the product name whose price lies greater than 20000.
+SQL> select pname from product where pprice>20000;
+
+PNAME                                                                           
+--------------------                                                            
+Fridge                                                                          
+
+SQL> select * from transaction;
+
+TRANSID    TRANSTYPE            TRANSAMOUNT TDATE     CID                       
+---------- -------------------- ----------- --------- ----------                
+t101       G-Pay                       6000 06-MAR-21 c101                      
+t102       G-Pay                      16000 26-JUN-21 c102                      
+t103       COD                         2000 02-DEC-21 c103                      
+t104       G-Pay                      10500 25-NOV-21 c104                      
+t105       G-Pay                      50000 03-OCT-21 c105                      
+t106       G-Pay                      25000 24-JUL-21 c106                      
+t107       G-Pay                      20000 06-FEB-21 c107                      
+t108       COD                         1500 18-JAN-21 c108                      
+t109       COD                        35000 23-SEP-21 c109                      
+t110       G-Pay                      12000 21-AUG-21 c110                      
+
+10 rows selected.
+
+6).Write a query to display the transaction details which are of the type 'cash on delivery'.
+SQL> select * from transaction where transtype='COD';
+
+TRANSID    TRANSTYPE            TRANSAMOUNT TDATE     CID                       
+---------- -------------------- ----------- --------- ----------                
+t103       COD                         2000 02-DEC-21 c103                      
+t108       COD                         1500 18-JAN-21 c108                      
+t109       COD                        35000 23-SEP-21 c109                      
+
+7).Write  a query to display the supplier address ending with 'Apk'.
+   SQL> select * from customer where address='%____________Apk';
+   no rows selected
+
+8).Write a query to display the customer table.
+  SQL> select * from customer;
+
+  CID        CNAME                      PHNO ADDRESS                              
+  ---------- -------------------- ---------- ---------------                      
+  c101       Rupha                9.9886E+10 12,CarSt,Apk                         
+  c102       Surya                6789543212 72,CarSt,Apk                         
+  c103       Hariharan            9487909089 99,PaulSt,Vnr                        
+  c104       Bala                 9987612500 9,BigSt,Vnr                          
+  c105       Shri                 9989922344 23,BigSt,Svk                         
+  c106       Vidhya               9912123364 34,WestSt,Svk                        
+  c107       Meghna               9112244364 76,WestSt,Mdu                        
+  c108       Gopinaath            9190807892 76,SouthSt,Mdu                       
+  c109       Prajin               9134568812 43,SouthSt,Apk                       
+  c110       Ashwin               6879704312 33,NorthSt,Apk                       
+  c111       Vijay                9508676800 11,Bazarst,Svk                       
+
+  11 rows selected.
+
+
+9).Write query to add a column city in customer table.
+    SQL> alter table customer add "city" varchar(20);
+
+    Table altered.
+
+
+10).Write a query to drop the column "city" from product table.
+    SQL> alter table customer drop column "city";
+
+    Table altered.
+
+11).Write a query to display the customer name starting with 'b'.
+    SQL> select * from customer where cname like 'b%';
+
+    no rows selected
+
+12).Write a query to display the customer name starting with 'v'.
+    SQL> select * from customer where cname like 'v%';
+
+    CID        CNAME                    PHNO ADDRESS
+  ---------- -------------------- ---------- ---------------
+   c101       vijay               9.9886E+10 12,CarSt,Apk
+
+13).Write a query to display the customer name starting with 'V'.
+   SQL> select * from customer where cname like 'V%';
+
+  CID        CNAME                      PHNO ADDRESS
+  ---------- -------------------- ---------- ---------------
+  c106       Vidhya               9912123364 34,WestSt,Svk
+  c111       Vijay                9508676800 11,Bazarst,Svk
+
+14).Write a query to dispaly the product table in ascending order.
+   SQL> select * from product order by pprice asc;
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+   ---------- -------------------- ---------- ---------- ---------- ----------
+   p107       Lipstick                     40       1000 s104       cosmetics
+   p108       LipStick                     40       1000 s105       cosmetics
+   p106       Eyeliner                     50       1000 s103       cosmetics
+   p112       Chair                       500       2500 s109       Furniture
+   p101       Saree                       500       1000 s101       dress
+   p102       Shirt                       800       2000 s101       dress
+   p120       JeanTop                    1000        200 s102       dress
+   p109       CollegeBag                 1500       2000 s106       Bag
+   p103       salwar                     2000       3000 s101       dress
+   p110       TravelBag                  2500       2500 s107       Bag
+   p111       LaptopBag                  2500       2500 s108       Bag
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+   ---------- -------------------- ---------- ---------- ---------- ----------  
+   p105       Ecooker                    5000       3000 s102       eappliance
+   p104       Fridge                    25000       3000 s102       eappliance
+
+   13 rows selected.
+
+15).Write a query to display the product table in descending order.
+   SQL> select * from product order by pprice desc;
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+   ---------- -------------------- ---------- ---------- ---------- ----------
+   p104       Fridge                    25000       3000 s102       eappliance
+   p105       Ecooker                    5000       3000 s102       eappliance
+   p110       TravelBag                  2500       2500 s107       Bag
+   p111       LaptopBag                  2500       2500 s108       Bag
+   p103       salwar                     2000       3000 s101       dress
+   p109       CollegeBag                 1500       2000 s106       Bag
+   p120       JeanTop                    1000        200 s102       dress
+   p102       Shirt                       800       2000 s101       dress
+   p112       Chair                       500       2500 s109       Furniture
+   p101       Saree                       500       1000 s101       dress
+   p106       Eyeliner                     50       1000 s103       cosmetics
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+   ---------- -------------------- ---------- ---------- ---------- ----------
+   p108       LipStick                     40       1000 s105       cosmetics
+   p107       Lipstick                     40       1000 s104       cosmetics
+
+   13 rows selected.
+
+16).Write  a query to display the product details whose price lies between 1000 and 3000.
+   SQL> select * from product where pprice between 1000 and 3000;
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+   ---------- -------------------- ---------- ---------- ---------- ----------
+   p103       salwar                     2000       3000 s101       dress
+   p109       CollegeBag                 1500       2000 s106       Bag
+   p110       TravelBag                  2500       2500 s107       Bag
+   p111       LaptopBag                  2500       2500 s108       Bag
+   p120       JeanTop                    1000        200 s102       dress
+
+17).Write a query to display the customer name ending with 'i'.
+    SQL> select * from customer where cname like '%i';
+
+    CID        CNAME                     PHNO ADDRESS
+   ---------- -------------------- ---------- ---------------
+    c105       Shri                 9989922344 23,BigSt,Svk
+
+18).Write a query to display the customer name starting with 's' and ending with 'i'.
+    SQL> select * from customer where cname like 'S%i';
+
+   CID        CNAME                      PHNO ADDRESS
+   ---------- -------------------- ---------- ---------------
+   c105       Shri                 9989922344 23,BigSt,Svk
+
+19).Write a query to display the customer name containing 'i'.
+   SQL> select * from customer where cname like '__%i_';
+
+   CID        CNAME                      PHNO ADDRESS
+   ---------- -------------------- ---------- ---------------
+   c110       Ashwin               6879704312 33,NorthSt,Apk
+   c109       Prajin               9134568812 43,SouthSt,Apk
+
+
+20).Write a query to display the customer name containing 'n'.
+    SQL> select * from supplier where sname like '__%n_';
+
+   SID        SNAME                       PN1        PN2 ADDRESS
+   ---------- -------------------- ---------- ---------- ---------------
+   s106       Meena                7865483921 6575894932 36,WestSt,Vnr
+
+21).Write a query to check whether the attributes in the category name or not.
+   SQL> select * from product where category_name IN('eappliance','cosmetics');
+
+   PID        PNAME                    PPRICE      AVAIL SID        CATEGORY_N
+  ---------- -------------------- ---------- ---------- ---------- ----------
+  p104       Fridge                    25000       3000 s102       eappliance
+  p105       Ecooker                    5000       3000 s102       eappliance
+  p106       Eyeliner                     50       1000 s103       cosmetics
+  p107       Lipstick                     40       1000 s104       cosmetics
+  p108       LipStick                     40       1000 s105       cosmetics
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

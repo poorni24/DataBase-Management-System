@@ -1,0 +1,150 @@
+1) CREATE TABLE:
+
+   Create table product(pid number(10) PRIMARY KEY, pname varchar(50) NOT NULL, quantity number(10) NOT NULL, price number(10) NOT NULL);
+
+2) INSERT VALUES INTO TABLE:
+
+   Insert into product(pid, pname, quantity, price) values(‘001’ , ‘soap’, ‘2’, ‘60’);
+
+3) ALTER TABLE:
+
+a)	Alter table product ADD stockno number(10);
+b)	Alter table product RENAME column stockno to stockcode;
+c)	Alter table product DROP column stockcode;
+d)	Alter table product MODIFY pid number(20);
+
+4) DELETE TABLE:
+
+a)	Drop table product;
+b)	Delete from product where id = ‘001’;
+c)	Delete from product where quantity = 0 AND pname = ‘kumar’;
+
+5) TRUNCATE TABLE:
+
+Truncate table product;
+
+6) CREATE LOCAL/GLOBAL TABLES:
+
+a)	Create GLOBAL TEMPORARY TABLE new_product(pid number(10), pname varchar(50));
+b)	Declare LOCAL TEMPORARY TABLE new_product(pid number(10), pname varchar(50));
+
+7) CREATE VIEW:
+
+a)	Create view product as SELECT pid, pname from new_product;
+b)	Drop view product;
+
+8) UPDATE TABLE:
+
+Update product set pname = ‘shampoo’ , price = ‘50’ where pid = ‘002’;
+
+9) ORACLE CLAUSES:
+
+a)	Select DISTINCT pname , pid from product where price<50;
+b)	Select * from product ORDER BY ASC/DESC;
+c)	Select pname, count(*) AS “No.of.customers” from product where price > 500 GROUP BY pname;
+d)	Select pname, min(quantity) AS “Lesser quantity” from product GROUP BY pname;
+e)	Select pname, max(quantity) AS “More quantity” from product GROUP BY pname;
+f)	Select pname, sum(price) AS “total sales” from product GROUP BY pname HAVING sum(price) < 1000;
+
+10) ORACLE OPERATORS:
+
+a)	Select * from product UNION Select * from customers;
+b)	Select pid from product UNION ALL Select pid from customers;
+c)	Select * from product INTERSECT Select * from customers;
+d)	Select pid, pname from product MINUS Select pid, pname from customers;
+
+11) SELECT QUERIES:
+
+a)	Select * from product;
+b)	Select pid, pname,  price from product where price < 500 AND price >100;
+c)	Select count(*) from product;
+
+12) INSERT VALUES MULTIPLE TIMES:
+
+INSERT ALL  
+Into product(pid, pname, quantity, price) values(‘001’ , ‘soap’, ‘2’, ‘60’);
+Into product(pid, pname, quantity, price) values(‘002’ , ‘Oil’, ‘1’, ‘80’);
+Into product(pid, pname, quantity, price) values(‘003’ , ‘Talcom Powder’, ‘1’, ‘40’);
+SELECT * FROM dual;  
+
+13) ORACLE JOINS:
+
+a)	Select p.pname, p.price, c.cname, c.totalcost FROM product AS p INNER JOIN customer AS c ON p.id = c.id; --Inner join
+b)	Select p.pname, p.price, c.cname, c.totalcost FROM product AS p LEFT OUTER JOIN customer AS c ON p.id = c.id; -- Left outer join
+c)	Select p.pname, p.price, c.cname, c.totalcost FROM product AS p RIGHT OUTER JOIN customer AS c ON p.id = c.id; -- Right outer join
+d)	Select p.pname, p.price, c.cname, c.totalcost FROM product AS p FULL OUTER JOIN customer AS c ON p.id = c.id; -- Full outer join
+e)	Select p.pname, p.price, c.cname, c.totalcost FROM product , customer WHERE p.id = c.id; --Anti join
+f)	Select * FROM product CROSS JOIN customer; (or) Select * FROM product , customer;  -- Cross join
+g)	Select a.name, a.age, b,salary from product a, product b where a.salary < b.salary; -- Self join
+
+14) ORACLE MISC:
+
+a) Logical Operators:
+Select name, price, pid from product where price > 1000 AND name = ‘shoban’;
+Select name, price, pid from product where price > 1000 OR name = ‘shoban’;
+
+b) Alias Name:
+Select SUM(price) AS totalprice from product;
+
+c) MISC:
+Select id, name, price from product where price BETWEEN 5000 AND 10000;
+Select name, price from product where price <> 999;
+Select * from product where name IN (‘Hari’, ‘Ram’, ‘Deepak’);
+Select * from product where name NOT IN (‘Hari’, ‘Ram’, ‘Deepak’);
+d) Exists / Not exists:
+Select * from A where EXISTS (Select * from B where A.id = B.id);
+Select * from A where NOT EXISTS (Select * from B where A.id = B.id);
+
+e) Null / Not null:
+Select * from product where name is NOT NULL;
+Select * from product where price is NULL;
+
+g) Like/ Not like:
+Select name, id from product where name LIKE S%;  -- start with S
+Select name, id from product where name LIKE %Y;  -- end with y
+Select name, id from product where name NOT LIKE a%; -- not start with a
+Select name, id from product where name LIKE 22__; -- start with 22
+
+ h) Subquery:
+Select name, price from A where id IN (Select id from B where A.id = B.id);
+
+15) ORACLE CONSTRAINTS:
+
+a)	Alter USER username IDENTIFIED BY new_password; -- to change passwd
+b)	Alter Product ENABLE CONSTRAINT constraint_name; -- to enable constraint
+c)	Alter Product DISABLE CONSTRAINT constraint_name; --to disable constraint
+
+16) RETRIEVE HEAD/TAIL RECORDS:
+
+/* Top n records*/
+a)	Select * from product where ROWNUM <= n;
+b)	Select * from product where ROWNUM <= n ORDER BY name;
+c)	Select * from ( Select * from product ORDE BY name) where ROWNUM <= n;
+
+/* Last n records*/
+a)	Select * from ( Select * from product ORDE BY name DESC) where ROWNUM <= n ORDER BY name ASC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
